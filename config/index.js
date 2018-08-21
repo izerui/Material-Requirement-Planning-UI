@@ -6,12 +6,15 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
+    proxyTable: {
+      '/api': {
+        target: 'http://localhost:8086', //源地址
+        changeOrigin: true //改变源
+      }
+    },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 9528, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -23,7 +26,7 @@ module.exports = {
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
-    useEslint: true,
+    useEslint: false,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
     showEslintErrorsInOverlay: false,
@@ -63,7 +66,7 @@ module.exports = {
      * then assetsPublicPath should be set to "/bar/".
      * In most cases please use '/' !!!
      */
-    assetsPublicPath: '/vueAdmin-template/', // If you are deployed on the root path, please use '/'
+    assetsPublicPath: '/', // If you are deployed on the root path, please use '/'
 
     /**
      * Source Maps

@@ -4,17 +4,18 @@
     <breadcrumb></breadcrumb>
     <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
-        <img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">
+        {{user.userName}}
+        <img class="user-avatar" :src="user.avatar">
         <i class="el-icon-caret-bottom"></i>
       </div>
       <el-dropdown-menu class="user-dropdown" slot="dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
-            Home
+            首页
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span @click="logout" style="display:block;">LogOut</span>
+          <span @click="logout" style="display:block;">登出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -31,20 +32,34 @@ export default {
     Breadcrumb,
     Hamburger
   },
+  data() {
+    return {
+      user: {}
+    };
+  },
   computed: {
     ...mapGetters([
-      'sidebar',
-      'avatar'
+      'sidebar'
     ])
   },
+  created() {
+    this.getUserInfo();
+  },
   methods: {
+    async getUserInfo() {
+      const resp = await this.$http.get('/api/context/user-info');
+      if(resp.success){
+        this.user = resp.data;
+      }
+    },
     toggleSideBar() {
       this.$store.dispatch('ToggleSideBar')
     },
-    logout() {
-      this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
-      })
+    async logout() {
+      const resp = await this.$http.get('/api/logout');
+      if(resp.success){
+        location = '/#/login';
+      }
     }
   }
 }
