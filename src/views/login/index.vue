@@ -49,7 +49,7 @@
           this.$message.error('密码不能小于5位');
           return
         }
-        const resp = await this.$post('/api/login', {
+        const resp = this.$post('/api/login', {
           username: this.username,
           password: this.password
         });

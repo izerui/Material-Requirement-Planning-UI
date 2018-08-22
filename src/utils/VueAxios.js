@@ -87,15 +87,27 @@ export default function plugin(Vue, axios) {
     },
     $get: {
       get() {
-        return async (url, param) => {
-          return await axios.get(url, { param: param });
-        };
+        return (url, param) => {
+          return new Promise((resolve, reject) => {
+            axios.get(url, { params: param }).then((resp) => {
+              resolve(resp)
+            }).catch(error => {
+              reject(error)
+            })
+          })
+        }
       }
     },
     $post: {
       get() {
-        return async (url, data, useBody = false) => {
-          return await axios.post(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' }))
+        return (url, data, useBody = false) => {
+          return new Promise((resolve, reject) => {
+            axios.post(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
+              resolve(resp)
+            }).catch(error => {
+              reject(error)
+            })
+          })
         }
       }
     }
