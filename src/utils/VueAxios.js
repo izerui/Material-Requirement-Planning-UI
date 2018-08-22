@@ -1,3 +1,5 @@
+import qs from 'qs';
+
 /**
  * Created by lucas on 2017/8/4.
  */
@@ -81,6 +83,20 @@ export default function plugin(Vue, axios) {
     $http: {
       get() {
         return axios;
+      }
+    },
+    $get: {
+      get() {
+        return async (url, param) => {
+          return await axios.get(url, { param: param });
+        };
+      }
+    },
+    $post: {
+      get() {
+        return async (url, data, useBody = false) => {
+          return await axios.post(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' }))
+        }
       }
     }
   });

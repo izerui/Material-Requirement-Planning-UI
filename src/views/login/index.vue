@@ -49,11 +49,10 @@
           this.$message.error('密码不能小于5位');
           return
         }
-        const resp = await this.$http.post('/api/login',
-          this.$qs.stringify({
-            username: this.username,
-            password: this.password
-          }));
+        const resp = await this.$post('/api/login', {
+          username: this.username,
+          password: this.password
+        });
         if (resp.success) {
           this.$router.push({ path: '/' })
         }
