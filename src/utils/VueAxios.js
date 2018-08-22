@@ -106,6 +106,39 @@ export default function plugin(Vue, axios) {
           })
         })
       }
+    },
+    $put: {
+      get() {
+        return (url, data, useBody = false) => new Promise((resolve, reject) => {
+          axios.put(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
+            resolve(resp)
+          }).catch(error => {
+            reject(error)
+          })
+        })
+      }
+    },
+    $patch: {
+      get() {
+        return (url, data) => new Promise((resolve, reject) => {
+          axios.patch(url, qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
+            resolve(resp)
+          }).catch(error => {
+            reject(error)
+          })
+        })
+      }
+    },
+    $delete: {
+      get() {
+        return (url, data) => new Promise((resolve, reject) => {
+          axios.delete(url + '?' + qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
+            resolve(resp)
+          }).catch(error => {
+            reject(error)
+          })
+        })
+      }
     }
   });
 }
