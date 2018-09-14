@@ -89,7 +89,11 @@ export default function plugin(Vue, axios) {
       get() {
         return (url, param) => new Promise((resolve, reject) => {
           axios.get(url, { params: param }).then((resp) => {
-            resolve(resp)
+            if (resp.success) {
+              resolve(resp.data)
+            } else {
+              Vue.prototype.$message.error(resp.errMsg);
+            }
           }).catch(error => {
             reject(error)
           })
@@ -100,7 +104,11 @@ export default function plugin(Vue, axios) {
       get() {
         return (url, data, useBody = false) => new Promise((resolve, reject) => {
           axios.post(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
-            resolve(resp)
+            if (resp.success) {
+              resolve(resp.data)
+            } else {
+              Vue.prototype.$message.error(resp.errMsg);
+            }
           }).catch(error => {
             reject(error)
           })
@@ -111,7 +119,11 @@ export default function plugin(Vue, axios) {
       get() {
         return (url, data, useBody = false) => new Promise((resolve, reject) => {
           axios.put(url, useBody ? data : qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
-            resolve(resp)
+            if (resp.success) {
+              resolve(resp.data)
+            } else {
+              Vue.prototype.$message.error(resp.errMsg);
+            }
           }).catch(error => {
             reject(error)
           })
@@ -122,7 +134,11 @@ export default function plugin(Vue, axios) {
       get() {
         return (url, data) => new Promise((resolve, reject) => {
           axios.patch(url, qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
-            resolve(resp)
+            if (resp.success) {
+              resolve(resp.data)
+            } else {
+              Vue.prototype.$message.error(resp.errMsg);
+            }
           }).catch(error => {
             reject(error)
           })
@@ -133,7 +149,11 @@ export default function plugin(Vue, axios) {
       get() {
         return (url, data) => new Promise((resolve, reject) => {
           axios.delete(url + '?' + qs.stringify(data, { arrayFormat: 'brackets' })).then((resp) => {
-            resolve(resp)
+            if (resp.success) {
+              resolve(resp.data)
+            } else {
+              Vue.prototype.$message.error(resp.errMsg);
+            }
           }).catch(error => {
             reject(error)
           })

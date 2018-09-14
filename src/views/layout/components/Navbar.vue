@@ -23,87 +23,84 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
+  import { mapGetters } from 'vuex'
+  import Breadcrumb from '@/components/Breadcrumb'
+  import Hamburger from '@/components/Hamburger'
 
-export default {
-  components: {
-    Breadcrumb,
-    Hamburger
-  },
-  data() {
-    return {
-      user: {}
-    };
-  },
-  computed: {
-    ...mapGetters([
-      'sidebar'
-    ])
-  },
-  created() {
-    this.getUserInfo();
-  },
-  methods: {
-    async getUserInfo() {
-      const resp = await this.$http.get('/api/context/user-info');
-      if(resp.success){
-        this.user = resp.data;
-      }
+  export default {
+    components: {
+      Breadcrumb,
+      Hamburger
     },
-    toggleSideBar() {
-      this.$store.dispatch('ToggleSideBar')
+    data() {
+      return {
+        user: {}
+      };
     },
-    async logout() {
-      const resp = await this.$http.get('/api/logout');
-      if(resp.success){
-        location = '/#/login';
+    computed: {
+      ...mapGetters([
+        'sidebar'
+      ])
+    },
+    created() {
+      this.getUserInfo();
+    },
+    methods: {
+      async getUserInfo() {
+        this.user = await this.$get('/context/user-info');
+      },
+      toggleSideBar() {
+        this.$store.dispatch('ToggleSideBar')
+      },
+      async logout() {
+        const resp = await this.$http.get('/api/logout');
+        if (resp.success) {
+          location = '/#/login';
+        }
       }
     }
   }
-}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.navbar {
-  height: 50px;
-  line-height: 50px;
-  border-radius: 0px !important;
-  .hamburger-container {
-    line-height: 58px;
+  .navbar {
     height: 50px;
-    float: left;
-    padding: 0 10px;
-  }
-  .screenfull {
-    position: absolute;
-    right: 90px;
-    top: 16px;
-    color: red;
-  }
-  .avatar-container {
-    height: 50px;
-    display: inline-block;
-    position: absolute;
-    right: 35px;
-    .avatar-wrapper {
-      cursor: pointer;
-      margin-top: 5px;
-      position: relative;
-      .user-avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-      }
-      .el-icon-caret-bottom {
-        position: absolute;
-        right: -20px;
-        top: 25px;
-        font-size: 12px;
+    line-height: 50px;
+    border-radius: 0px !important;
+    .hamburger-container {
+      line-height: 58px;
+      height: 50px;
+      float: left;
+      padding: 0 10px;
+    }
+    .screenfull {
+      position: absolute;
+      right: 90px;
+      top: 16px;
+      color: red;
+    }
+    .avatar-container {
+      height: 50px;
+      display: inline-block;
+      position: absolute;
+      right: 35px;
+      .avatar-wrapper {
+        cursor: pointer;
+        margin-top: 5px;
+        position: relative;
+        .user-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+        .el-icon-caret-bottom {
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
+        }
       }
     }
   }
-}
 </style>
 
