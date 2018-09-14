@@ -53,10 +53,7 @@
         this.$store.dispatch('ToggleSideBar')
       },
       async logout() {
-        const resp = await this.$http.get('/api/logout');
-        if (resp.success) {
-          location = '/#/login';
-        }
+        window.location = '/logout';
       }
     }
   }

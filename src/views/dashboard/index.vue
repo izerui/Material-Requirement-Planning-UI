@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-container">
+    <el-button type="primary" @click="getSession">获取session</el-button>
     <el-form>
       <el-form-item label="name:">
         <el-input v-model="myName" placeholder="请输入名字"></el-input>
@@ -29,32 +30,36 @@
     },
     methods: {
       async getAction() {
-        const resp = await this.$get("/api/context/test-param", this.params);
-        this.$message.info(resp.data);
+        const data = await this.$get("/context/test-param", this.params);
+        this.$message.info(data);
       },
       async postAction() {
-        const resp = await this.$post("/api/context/test-param", this.params);
-        this.$message.info(resp.data);
+        const data = await this.$post("/context/test-param", this.params);
+        this.$message.info(data);
       },
       async deleteAction() {
-        const resp = await this.$delete("/api/context/test-param", this.params);
-        this.$message.info(resp.data);
+        const data = await this.$delete("/context/test-param", this.params);
+        this.$message.info(data);
       },
       async postBodyAction() {
-        const resp = await this.$post("/api/context/post-body", this.params , true);
-        this.$message.info(resp.data);
+        const data = await this.$post("/context/post-body", this.params , true);
+        this.$message.info(data);
       },
       async putAction() {
-        const resp = await this.$put("/api/context/test-param", this.params);
-        this.$message.info(resp.data);
+        const data = await this.$put("/context/test-param", this.params);
+        this.$message.info(data);
       },
       async putBodyAction() {
-        const resp = await this.$put("/api/context/put-body", this.params, true);
-        this.$message.info(resp.data);
+        const data = await this.$put("/context/put-body", this.params, true);
+        this.$message.info(data);
       },
       async patchAction() {
-        const resp = await this.$patch("/api/context/test-param", this.params);
-        this.$message.info(resp.data);
+        const data = await this.$patch("/context/test-param", this.params);
+        this.$message.info(data);
+      },
+      async getSession() {
+        const sessionId = await this.$get("/context/session");
+        this.$message.info(sessionId);
       }
     },
     computed: {
