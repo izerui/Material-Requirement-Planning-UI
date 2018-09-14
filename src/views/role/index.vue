@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="userList">
+    <el-table :data="roleList">
       <el-table-column type="index" label="序号"></el-table-column>
       <el-table-column prop="avatar" label="头像">
         <template slot-scope="scope">
@@ -22,20 +22,20 @@
     name: "index",
     data() {
       return {
-        userList: []
+        roleList: []
       }
     },
     created() {
-      this.listUsers();
+      this.listRoles();
     },
     watch: {
       $route() {
-        this.listUsers();
+        this.listRoles();
       }
     },
     methods: {
-      async listUsers() {
-        this.userList = await this.$get("/rbac/list-users");
+      async listRoles() {
+        this.roleList = await this.$get("/rbac/list-roles");
       }
     }
 
