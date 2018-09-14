@@ -8,7 +8,6 @@
         </template>
       </el-table-column>
       <el-table-column prop="account" label="手机号"></el-table-column>
-      <el-table-column prop="userCode" label="用户编码"></el-table-column>
       <el-table-column prop="userName" label="用户名"></el-table-column>
       <el-table-column prop="gender" label="性别"></el-table-column>
       <el-table-column prop="admin" label="管理员"></el-table-column>
