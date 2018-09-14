@@ -61,7 +61,7 @@ export default function plugin(Vue, axios) {
     const { success, errCode, errMsg } = data;
     if (!success) {
       if (errCode === 'UN_LOGIN') {
-        window.location.href = '/#/login';
+        window.location.href = '/login';
       } else {
         Vue.prototype.$message.error(errMsg === undefined || errMsg === null || errMsg === '' ? '服务器异常' : errMsg);
       }
