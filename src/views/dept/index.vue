@@ -1,16 +1,10 @@
 <template>
-  <div>
-    <el-table :data="userList">
+  <div style="margin: 10px">
+    <el-button type="primary">新增</el-button>
+    <el-button>新增</el-button>
+    <el-table :data="dataList">
       <el-table-column type="index" label="序号"></el-table-column>
-      <el-table-column prop="avatar" label="头像">
-        <template slot-scope="scope">
-          <avatar :username="scope.row.userName" :src="scope.row.avatar" :size="40"></avatar>
-        </template>
-      </el-table-column>
-      <el-table-column prop="account" label="手机号"></el-table-column>
-      <el-table-column prop="userName" label="用户名"></el-table-column>
-      <el-table-column prop="gender" label="性别"></el-table-column>
-      <el-table-column prop="admin" label="管理员"></el-table-column>
+      <el-table-column prop="account" label="部门名称"></el-table-column>
       <el-table-column prop="recordStatus" label="状态"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -25,7 +19,7 @@
 
 <script>
   import Avatar from 'vue-avatar';
-  import UserForm from "./userForm";
+  import UserForm from "../user/userForm";
 
   export default {
     name: "index",
@@ -35,7 +29,7 @@
     },
     data() {
       return {
-        userList: [],
+        dataList: [],
         form: {
           show: false,
           state: 'info'
@@ -43,18 +37,18 @@
       }
     },
     created() {
-      this.listUsers();
+      this.listData();
     },
     computed: {
     },
     watch: {
       $route() {
-        this.listUsers();
+        this.listData();
       }
     },
     methods: {
-      async listUsers() {
-        this.userList = await this.$get("/rbac/list-users");
+      async listData() {
+        this.dataList = await this.$get("/rbac/list-depts");
       },
       edit(item) {
         this.form.state = 'edit';

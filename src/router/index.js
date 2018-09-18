@@ -28,10 +28,22 @@ export const constantRouterMap = [
     component: Layout,
     children: [{
       path: '/',
-      name: '主页',
+      name: '首页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '主页', icon: 'form' }
+      meta: { title: '首页', icon: 'form' }
     }]
+  },
+  {
+    path: '/',
+    component: Layout,
+    children: [
+      {
+        path: '/dept-manager',
+        name: '部门管理',
+        component: () => import('@/views/dept/index'),
+        meta: { title: '部门管理', icon: 'form' }
+      }
+    ]
   },
   {
     path: '/',
