@@ -53,7 +53,8 @@
         this.$store.dispatch('ToggleSideBar')
       },
       async logout() {
-        window.location = '/logout';
+        let data = await this.$get('/logout');
+        this.$router.push({ path: '/login' })
       }
     }
   }

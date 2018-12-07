@@ -38,7 +38,7 @@
         this.$message.info(data);
       },
       async postBodyAction() {
-        const data = await this.$post("/context/post-body", this.params , true);
+        const data = await this.$post("/context/post-body", this.params, true);
         this.$message.info(data);
       },
       async putAction() {
@@ -57,6 +57,8 @@
         const sessionId = await this.$get("/context/session");
         this.$message.info(sessionId);
       }
+    },
+    created() {
     },
     computed: {
       params() {

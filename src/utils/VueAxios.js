@@ -1,5 +1,5 @@
 import qs from 'qs';
-
+import router from '../router';
 /**
  * Created by lucas on 2017/8/4.
  */
@@ -61,7 +61,7 @@ export default function plugin(Vue, axios) {
     const { success, errCode, errMsg } = data;
     if (!success) {
       if (errCode === 'UN_LOGIN') {
-        window.location.href = '/login';
+        router.push({ path: '/login' })
       } else {
         Vue.prototype.$message.error(errMsg === undefined || errMsg === null || errMsg === '' ? '服务器异常' : errMsg);
       }
